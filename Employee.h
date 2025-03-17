@@ -11,6 +11,7 @@ class Employee {
     string schedule[7] = {};
     const string days[7] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
+
     Employee(){
         name = "";
         position[1];
@@ -44,23 +45,7 @@ class Employee {
         return job;
     }
 
-    string setschedule(){
-        for (int day = 1; day <= 7; day++){
-            cout << days[day - 1] << " (Night or Day shift or Off work): ";
-            retype:
-            string work;
-            cin >> work;
-
-            if (work == "night" || work == "Night" || work == "day" || work == "Day" || work == "off" || work == "Off"){
-                schedule[day] = work;
-            }
-
-            else{
-                cout << "\ntype Day or Night or Off\n";
-                goto retype;
-            }
-        }
-    }
+    
 
     string shiftToHRs(int day){
         if (schedule[day] == "Day" || schedule[day] == "day"){
@@ -72,6 +57,33 @@ class Employee {
         else{
             return "off work";
         }
+    }
+
+    void setschedule(string name){
+        int HRs = 0;
+        cout << name << "'s schedule: " << endl;
+        for (int day = 1; day <= 7; day++){
+            retype:
+            cout << days[day - 1] << " (Night or Day shift or Off work): ";
+            string work;
+            cin >> work;
+        
+            if (work == "night" || work == "Night" || work == "day" || work == "Day" || work == "off" || work == "Off"){
+                schedule[day] = work;
+                if (work == "night" || work == "Night" || work == "day" || work == "Day"){
+                    HRs += 8;
+                }
+            }
+            else{
+                cout << "\ntype Day or Night or Off\n";
+                goto retype;
+            } 
+
+            if (HRs == 40){
+                cout << "Max hours assigned\n";
+                break;
+            }
+        }  
     }
 
     void displayschedule(){
