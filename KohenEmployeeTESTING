@@ -15,7 +15,7 @@ int main()
 
     fireEmployee("Tim");
 
-    wageChange("Bob", 25);
+    changewage("Bob", 25);
 
     hireEmployee("John", 0, 18);
     scheduleSet("John");
