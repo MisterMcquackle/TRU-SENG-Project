@@ -1,0 +1,24 @@
+#include "Employees.h"
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    hireEmployee("Tim", 0, 18);
+    scheduleSet("Tim");
+
+    hireEmployee("Bob", 1, 20);
+    scheduleSet("Bob");
+
+    displayEmployees();
+
+    fireEmployee("Tim");
+
+    hireEmployee("John", 0, 18);
+    scheduleSet("John");
+
+    selectEmployee("Bob");
+
+    return 0;
+}
