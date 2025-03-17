@@ -74,3 +74,11 @@ void fireEmployee(string name){
         cout << name << " is not an employee" << endl;
     }
 }
+
+void changewage(string name, int wagechange){
+    for (const auto& nom : E){
+        if (nom->name == name){
+            nom->wagechange(wagechange);
+        }
+    }
+}
