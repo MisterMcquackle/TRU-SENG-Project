@@ -9,6 +9,12 @@ using namespace std;
 vector<string> Employees;
 vector<shared_ptr<Employee>> E;
 
+void displayEmployees(){
+    cout << "Employees: " << endl;
+    for (string employee : Employees){
+        cout << employee << endl;
+    }
+}
 
 void selectEmployee(string name){
     bool found = false;
