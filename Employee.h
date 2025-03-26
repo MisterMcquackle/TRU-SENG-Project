@@ -1,6 +1,6 @@
 // ===============================================
 // TANK'S Distribution System
-// Employee Class
+// Employee Class Header
 // ===============================================
 
 #ifndef EMPLOYEE_H
@@ -18,8 +18,8 @@ private:
     std::string job;
     std::string schedule[7];
 
-    const std::string positions[5] = {"Shelf Stocker", "Reception", "Delivery", "Manager", "Temp"};
-    const std::string days[7] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    static const std::string positions[5];
+    static const std::string days[7];
 
 public:
     // Default Constructor
@@ -28,39 +28,33 @@ public:
     }
 
     // Parameterized Constructor
-    Employee(const std::string& setname, int setposition, double setpayperHR) {
+    Employee(const std::string& setname, const std::string& setjob, double setpayperHR) {
         name = setname;
-        job = positions[std::clamp(setposition, 0, 4)];
+        job = setjob;
         payperHR = setpayperHR;
         for (auto& s : schedule) s = "Off";
     }
 
-    // Set hourly wage
     void wagechange(double newpayperHR) {
         payperHR = newpayperHR;
     }
 
-    // Get hourly wage
     double getpayperHR() const {
         return payperHR;
     }
 
-    // Estimate annual salary
     double getsalary() const {
         return (payperHR * 40.0) * 52.143;
     }
 
-    // Get name
     std::string getname() const {
         return name;
     }
 
-    // Get job title
     std::string getjob() const {
         return job;
     }
 
-    // Translate schedule to time blocks
     std::string shiftToHRs(int day) const {
         if (schedule[day] == "Day" || schedule[day] == "day")
             return "6:00am - 2:00pm";
@@ -70,7 +64,6 @@ public:
             return "Off";
     }
 
-    // Set weekly schedule for an employee
     void setschedule(const std::string& employeeName) {
         int totalHours = 0;
         std::cout << "\033[1;36m" << employeeName << "'s Schedule Setup:\033[0m\n";
@@ -95,14 +88,12 @@ public:
         }
     }
 
-    // Display the employee's schedule
     void displayschedule() const {
         for (int i = 0; i < 7; ++i) {
             std::cout << std::setw(10) << std::left << days[i] << ": " << shiftToHRs(i) << "\n";
         }
     }
 
-    // Display all employee info
     void displayInfo() const {
         std::cout << "\n\033[1;34m--- Employee Info ---\033[0m\n";
         std::cout << "Name     : " << getname() << "\n";
