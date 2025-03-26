@@ -1,12 +1,19 @@
-#ifndef SETTINGS_H
-#define SETTINGS_H
+// ===============================================
+// TANK'S Distribution System
+// Settings Menu Interface
+// ===============================================
+
+#ifndef SETTINGSMENU_H
+#define SETTINGSMENU_H
 
 #include "Menu.h"
-#include <iostream>
 
 class SettingsMenu : public Menu {
 public:
     void display() override;
+
+private:
+    void changeTheme(); // Example setting
 };
 
-#endif // SETTINGS_H
+#endif
