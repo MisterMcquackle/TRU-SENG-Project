@@ -1,12 +1,21 @@
+// ===============================================
+// TANK'S Distribution System
+// Reports Menu Interface
+// ===============================================
+
 #ifndef REPORTSMENU_H
 #define REPORTSMENU_H
 
 #include "Menu.h"
-#include <iostream>
 
 class ReportsMenu : public Menu {
 public:
     void display() override;
+
+private:
+    void generatePayrollReport();
+    void generatePackageSummary();
+    void generateImportSummary();
 };
 
-#endif // REPORTSMENU_H
+#endif
