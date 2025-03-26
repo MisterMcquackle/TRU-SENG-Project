@@ -1,10 +1,18 @@
+// ===============================================
+// TANK'S Distribution System
+// Base Menu Class
+// ===============================================
+
 #ifndef MENU_H
 #define MENU_H
 
+#include <iostream>
+
+// Abstract base class for all menu types
 class Menu {
 public:
-    virtual void display() = 0; // Pure virtual function
-    virtual ~Menu() {}          // Virtual destructor
+    virtual ~Menu() = default;
+    virtual void display() = 0; // Pure virtual function for displaying the menu
 };
 
-#endif // MENU_H
+#endif
