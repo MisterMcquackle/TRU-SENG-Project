@@ -1,8 +1,3 @@
-// ===============================================
-// TANK'S Distribution System
-// Employee Class Header
-// ===============================================
-
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
 
@@ -17,72 +12,67 @@ private:
     double payperHR;
     std::string job;
     std::string schedule[7];
-
     static const std::string positions[5];
     static const std::string days[7];
 
 public:
-    // Default Constructor
     Employee() : name(""), payperHR(0.0), job("Unassigned") {
         for (auto& s : schedule) s = "Off";
     }
 
-    // Parameterized Constructor
     Employee(const std::string& setname, const std::string& setjob, double setpayperHR) {
         name = setname;
-        job = setjob;
+        job = validatePosition(setjob);
         payperHR = setpayperHR;
         for (auto& s : schedule) s = "Off";
+    }
+
+    static std::string validatePosition(const std::string& pos) {
+        for (const auto& p : positions) {
+            if (p == pos) return p;
+        }
+        return "Invalid";
     }
 
     void wagechange(double newpayperHR) {
         payperHR = newpayperHR;
     }
 
-    double getpayperHR() const {
-        return payperHR;
-    }
+    double getpayperHR() const { return payperHR; }
 
-    double getsalary() const {
-        return (payperHR * 40.0) * 52.143;
-    }
+    double getsalary() const { return (payperHR * 40.0) * 52.143; }
 
-    std::string getname() const {
-        return name;
-    }
+    std::string getname() const { return name; }
 
-    std::string getjob() const {
-        return job;
-    }
+    std::string getjob() const { return job; }
 
-    std::string shiftToHRs(int day) const {
-        if (schedule[day] == "Day" || schedule[day] == "day")
-            return "6:00am - 2:00pm";
-        else if (schedule[day] == "Night" || schedule[day] == "night")
-            return "2:00pm - 10:00pm";
-        else
-            return "Off";
-    }
-
-    void setschedule(const std::string& employeeName) {
+    void setschedule() {
+        std::cout << "\n\033[1;36mEnter number of hours (0–8) for each day:\033[0m\n";
         int totalHours = 0;
-        std::cout << "\033[1;36m" << employeeName << "'s Schedule Setup:\033[0m\n";
+
         for (int i = 0; i < 7; ++i) {
-            std::string work;
+            int hours = -1;
             while (true) {
-                std::cout << days[i] << " (Day / Night / Off): ";
-                std::cin >> work;
-                std::transform(work.begin(), work.end(), work.begin(), ::tolower);
-                if (work == "day" || work == "night" || work == "off") {
-                    schedule[i] = work;
-                    if (work != "off") totalHours += 8;
-                    break;
+                std::cout << days[i] << ": ";
+                std::cin >> hours;
+
+                if (std::cin.fail() || hours < 0 || hours > 8) {
+                    std::cin.clear();
+                    std::cin.ignore(10000, '\n');
+                    std::cout << "❌ Please enter a valid number between 0 and 8.\n";
                 } else {
-                    std::cout << "\033[1;31mInvalid input. Please type Day, Night or Off.\033[0m\n";
+                    break;
                 }
             }
+
+            schedule[i] = (hours == 0) ? "Off" : (hours <= 4 ? "Half Day" : "Full Day");
+            totalHours += hours;
+
             if (totalHours >= 40) {
-                std::cout << "\033[1;33m40 hours reached. No more shifts will be assigned.\033[0m\n";
+                std::cout << "✅ 40-hour limit reached. Remaining days set to Off.\n";
+                for (int j = i + 1; j < 7; ++j) {
+                    schedule[j] = "Off";
+                }
                 break;
             }
         }
@@ -90,7 +80,7 @@ public:
 
     void displayschedule() const {
         for (int i = 0; i < 7; ++i) {
-            std::cout << std::setw(10) << std::left << days[i] << ": " << shiftToHRs(i) << "\n";
+            std::cout << std::setw(10) << std::left << days[i] << ": " << schedule[i] << "\n";
         }
     }
 
@@ -105,6 +95,14 @@ public:
         std::cout << "Est. Salary : $" << getsalary() << "\n";
         std::cout << "---------------------------\n";
     }
+};
+
+const std::string Employee::positions[5] = {
+    "Shelf Stocker", "Reception", "Delivery", "Manager", "Temp"
+};
+
+const std::string Employee::days[7] = {
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
 };
 
 #endif

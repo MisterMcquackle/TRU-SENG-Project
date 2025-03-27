@@ -38,14 +38,24 @@ void EmployeeMenu::addEmployee() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Enter employee name: ";
     std::getline(std::cin, name);
-    std::cout << "Enter position (Shelf Stocker, Reception, Delivery, Manager, Temp): ";
-    std::getline(std::cin, position);
+
+    while (true) {
+        std::cout << "Enter position (Shelf Stocker, Reception, Delivery, Manager, Temp): ";
+        std::getline(std::cin, position);
+        if (Employee::validatePosition(position) != "Invalid") break;
+        std::cout << "❌ Invalid position. Please try again.\n";
+    }
+
     std::cout << "Enter hourly rate: ";
     std::cin >> hourlyRate;
 
-    employees.emplace_back(name, position, hourlyRate);
+    Employee newEmp(name, position, hourlyRate);
+    newEmp.setschedule();
+    employees.push_back(newEmp);
+
     std::cout << "\033[1;32mEmployee added successfully!\033[0m\n";
 }
+
 
 void EmployeeMenu::viewEmployees() const {
     if (employees.empty()) {
@@ -71,12 +81,22 @@ void EmployeeMenu::updateEmployee() {
             std::cout << "Enter new hourly rate: ";
             std::cin >> newRate;
             emp.wagechange(newRate);
-            std::cout << "\033[1;32mHourly rate updated!\033[0m\n";
+
+            std::cout << "Update schedule? (y/n): ";
+            char choice;
+            std::cin >> choice;
+            if (choice == 'y' || choice == 'Y') {
+                emp.setschedule();
+            }
+
+            std::cout << "\033[1;32mEmployee updated!\033[0m\n";
             return;
         }
     }
+
     std::cout << "\033[1;31mEmployee not found.\033[0m\n";
 }
+
 
 void EmployeeMenu::deleteEmployee() {
     std::string searchName;
