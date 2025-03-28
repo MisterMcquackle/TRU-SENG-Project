@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 // Abstract base class for all menu types
 class Menu {
 public:
