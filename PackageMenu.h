@@ -10,9 +10,11 @@
 #include "Package.h"
 #include <vector>
 
+using namespace std;
+
 class PackageMenu : public Menu {
 private:
-    std::vector<Package> packages;
+    vector<Package> packages;
 
 public:
     void display() override;
