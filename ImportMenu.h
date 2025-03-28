@@ -10,9 +10,11 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 class ImportMenu : public Menu {
 private:
-    std::vector<std::string> importRecords;
+    vector<string> importRecords;
 
 public:
     void display() override;
