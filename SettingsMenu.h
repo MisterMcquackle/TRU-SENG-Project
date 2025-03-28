@@ -7,6 +7,7 @@
 #define SETTINGSMENU_H
 
 #include "Menu.h"
+using namespace std;
 
 class SettingsMenu : public Menu {
 public:
