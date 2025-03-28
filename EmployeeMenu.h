@@ -10,10 +10,12 @@
 #include "Employee.h"
 #include <vector>
 
+using namespace std;
+
 // Menu class for handling employee-related functions
 class EmployeeMenu : public Menu {
 private:
-    std::vector<Employee> employees; // Container for employee records
+    vector<Employee> employees; // Container for employee records
 
 public:
     void display() override; // Override display function to show employee menu
