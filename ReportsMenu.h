@@ -7,6 +7,7 @@
 #define REPORTSMENU_H
 
 #include "Menu.h"
+using namespace std;
 
 class ReportsMenu : public Menu {
 public:
