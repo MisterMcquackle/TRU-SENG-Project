@@ -4,11 +4,12 @@
 // ===============================================
 
 #include "Employee.h"
+using namespace std;
 
-const std::string Employee::positions[5] = {
+const string Employee::positions[5] = {
     "Shelf Stocker", "Reception", "Delivery", "Manager", "Temp"
 };
 
-const std::string Employee::days[7] = {
+const string Employee::days[7] = {
     "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
 };
