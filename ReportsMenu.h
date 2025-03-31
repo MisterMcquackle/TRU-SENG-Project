@@ -7,16 +7,20 @@
 #define REPORTSMENU_H
 
 #include "Menu.h"
-using namespace std;
+#include "Employees.h"
+#include <vector>
 
 class ReportsMenu : public Menu {
-public:
-    void display() override;
-
 private:
+    Employees* employees;
+
     void generatePayrollReport();
-    void generatePackageSummary();
-    void generateImportSummary();
+    void generatePackageSummary(); // stub for now
+    void generateImportSummary();  // stub for now
+
+public:
+    ReportsMenu(Employees* empList) : employees(empList) {}
+    void display() override;
 };
 
 #endif

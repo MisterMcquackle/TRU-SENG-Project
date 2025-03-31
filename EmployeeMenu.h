@@ -7,21 +7,18 @@
 #define EMPLOYEEMENU_H
 
 #include "Menu.h"
-#include "Employee.h"
+#include "Employees.h"
 #include <vector>
 
-using namespace std;
-
-// Menu class for handling employee-related functions
 class EmployeeMenu : public Menu {
 private:
-    vector<Employee> employees; // Container for employee records
+    Employees* employees;
 
 public:
-    void display() override; // Override display function to show employee menu
+    EmployeeMenu(Employees* empList) : employees(empList) {}
+    void display() override;
 
 private:
-    // Menu options
     void addEmployee();
     void viewEmployees() const;
     void updateEmployee();

@@ -1,23 +1,19 @@
-// ===============================================
-// TANK'S Distribution System
-// Reports Menu Implementation
-// ===============================================
-
 #include "ReportsMenu.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
 void ReportsMenu::display() {
     int choice;
     do {
-        cout << "\n\033[1;35m--- Reports & Dashboard ---\033[0m\n"
-             << "1. Generate Payroll Report\n"
-             << "2. Package Distribution Summary\n"
-             << "3. Import Cost Summary\n"
-             << "4. Back to Main Menu\n"
-             << "----------------------------\n"
-             << "Enter your choice: ";
+        cout << "\n\033[1;35m--- Reports & Dashboard ---\033[0m\n";
+        cout << "1. Generate Payroll Report\n";
+        cout << "2. Package Distribution Summary\n";
+        cout << "3. Import Cost Summary\n";
+        cout << "4. Back to Main Menu\n";
+        cout << "-----------------------------\n";
+        cout << "Enter your choice: ";
         cin >> choice;
 
         switch (choice) {
@@ -25,19 +21,29 @@ void ReportsMenu::display() {
             case 2: generatePackageSummary(); break;
             case 3: generateImportSummary(); break;
             case 4: break;
-            default: cout << "\033[1;31mInvalid choice!\033[0m\n";
+            default: cout << "\033[1;31mInvalid choice!\033[0m\n"; break;
         }
     } while (choice != 4);
 }
 
 void ReportsMenu::generatePayrollReport() {
-    cout << "\033[1;32m[Payroll] Total payroll calculated: $25,000 this month.\033[0m\n";
+    if (!employees) return;
+
+    double totalPayroll = 0.0;
+    cout << "\n\033[1;34m[Payroll Report]\033[0m\n";
+    for (const auto& emp : employees->getList()) {
+        cout << left << setw(20) << emp.getName()
+             << " | $" << fixed << setprecision(2) << emp.getSalary() << "\n";
+        totalPayroll += emp.getSalary();
+    }
+    cout << "----------------------------------\n";
+    cout << "Total Estimated Payroll: $" << totalPayroll << "\n";
 }
 
 void ReportsMenu::generatePackageSummary() {
-    cout << "\033[1;32m[Packages] 120 packages processed today.\033[0m\n";
+    cout << "\n\033[1;33m[Packages] Feature not yet implemented.\033[0m\n";
 }
 
 void ReportsMenu::generateImportSummary() {
-    cout << "\033[1;32m[Imports] 15 new imports received this week.\033[0m\n";
+    cout << "\n\033[1;33m[Imports] Feature not yet implemented.\033[0m\n";
 }

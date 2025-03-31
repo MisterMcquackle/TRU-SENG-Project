@@ -3,7 +3,7 @@
 
 #include "Employee.h"
 #include <vector>
-#include <algorithm>
+#include <string>
 
 class Employees {
 private:
@@ -14,6 +14,8 @@ public:
     void removeEmployee(const std::string& name);
     void displayAll() const;
     Employee* findEmployee(const std::string& name);
+
+    const std::vector<Employee>& getList() const { return employeeList; }
 };
 
 #endif
