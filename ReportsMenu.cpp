@@ -1,6 +1,7 @@
 #include "ReportsMenu.h"
 #include <iostream>
 #include <iomanip>
+#include <map>
 
 using namespace std;
 
@@ -41,7 +42,22 @@ void ReportsMenu::generatePayrollReport() {
 }
 
 void ReportsMenu::generatePackageSummary() {
-    cout << "\n\033[1;33m[Packages] Feature not yet implemented.\033[0m\n";
+    if (!packages || packages->empty()) {
+        cout << "\n\033[1;33m[Packages] No package data available.\033[0m\n";
+        return;
+    }
+
+    cout << "\n\033[1;34m[Package Distribution Summary]\033[0m\n";
+
+    map<string, int> destinationCount;
+    for (const auto& pkg : *packages) {
+        destinationCount[pkg.getDestination()]++;
+    }
+
+    for (const auto& entry : destinationCount) {
+        cout << left << setw(20) << entry.first
+             << ": " << entry.second << " package(s)\n";
+    }
 }
 
 void ReportsMenu::generateImportSummary() {

@@ -1,8 +1,3 @@
-// ===============================================
-// TANK'S Distribution System
-// Package Class Header
-// ===============================================
-
 #ifndef PACKAGE_H
 #define PACKAGE_H
 
@@ -28,6 +23,10 @@ public:
 
     string getTrackingNumber() const {
         return trackingNumber;
+    }
+
+    string getDestination() const {
+        return destination;
     }
 
     void displayInfo() const {

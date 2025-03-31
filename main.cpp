@@ -41,7 +41,7 @@ int main() {
                 menu = new ImportMenu();
                 break;
             case 4:
-                menu = new ReportsMenu(&employees);
+                menu = new ReportsMenu(&employees, &packages);
                 break;
             case 5:
                 menu = new SettingsMenu(&employees, &packages);
