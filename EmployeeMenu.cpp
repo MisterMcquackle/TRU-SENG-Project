@@ -1,7 +1,8 @@
-// ========================================
-// TANK's Distribution System
-// Employee Menu Implementation (Fixed) 
-// ========================================
+// ###########################################
+// #     TANK'S DISTRIBUTION SYSTEM          #
+// #  2025 - 03 - 29 (Final Hotfix)          #
+// #  Built By: Andrew, Davis, Kohen, Matteo #
+// ###########################################
 
 #include "EmployeeMenu.h"
 #include <iostream>
@@ -10,6 +11,7 @@
 
 using namespace std;
 
+// Menu logic for employee options
 void EmployeeMenu::display() {
     int choice;
     do {
@@ -29,7 +31,7 @@ void EmployeeMenu::display() {
             case 3: updateEmployee(); break;
             case 4: deleteEmployee(); break;
             case 5:
-                cout << "Returning to main menu...\n";
+                cout << "\033[1;32mReturning to main menu...\033[0m\n";
                 break;
             default:
                 cout << "\033[1;31mInvalid choice! Please enter a number between 1 and 5.\033[0m\n";
@@ -38,6 +40,7 @@ void EmployeeMenu::display() {
     } while (choice != 5);
 }
 
+// Adds a new employee and auto-generates a schedule
 void EmployeeMenu::addEmployee() {
     string name, job;
     double rate;
@@ -56,13 +59,15 @@ void EmployeeMenu::addEmployee() {
     e.setSchedule();
     employees->addEmployee(e);
 
-    cout << "Employee added successfully.\n";
+    cout << "\033[1;32mEmployee added successfully.\033[0m\n";
 }
 
+// Displays all employees
 void EmployeeMenu::viewEmployees() const {
     employees->displayAll();
 }
 
+// Update an employee’s weekly schedule
 void EmployeeMenu::updateEmployee() {
     string name;
     cin.ignore();
@@ -72,12 +77,13 @@ void EmployeeMenu::updateEmployee() {
     Employee* emp = employees->findEmployee(name);
     if (emp) {
         emp->setSchedule();
-        cout << "Schedule updated.\n";
+        cout << "\033[1;32mSchedule updated.\033[0m\n";
     } else {
-        cout << "Employee not found.\n";
+        cout << "\033[1;31mEmployee not found.\033[0m\n";
     }
 }
 
+// Delete an employee from the system
 void EmployeeMenu::deleteEmployee() {
     string name;
     cin.ignore();

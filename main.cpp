@@ -1,3 +1,9 @@
+// ###########################################
+// #     TANK'S DISTRIBUTION SYSTEM          #
+// #  2025 - 03 - 29 (Final Hotfix)          #
+// #  Built By: Andrew, Davis, Kohen, Matteo #
+// ###########################################
+
 #include <iostream>
 #include <vector>
 #include "EmployeeMenu.h"
@@ -7,17 +13,21 @@
 #include "SettingsMenu.h"
 #include "Employees.h"
 #include "Package.h"
+#include "Import.h"
 
 using namespace std;
 
 int main() {
     int choice;
     Menu* menu = nullptr;
+
+    // Global app state
     Employees employees;
     vector<Package> packages;
     vector<Import> imports;
 
     do {
+        // Welcome UI
         cout << "\n\033[1;36m==============================\033[0m\n";
         cout << "\033[1;36m TANK's Distribution System \033[0m\n";
         cout << "\033[1;36m==============================\033[0m\n";
@@ -55,6 +65,7 @@ int main() {
                 continue;
         }
 
+        // Show selected menu
         menu->display();
         delete menu;
     } while (true);

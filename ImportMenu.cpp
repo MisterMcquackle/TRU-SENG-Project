@@ -1,9 +1,16 @@
+// ###########################################
+// #     TANK'S DISTRIBUTION SYSTEM          #
+// #  2025 - 03 - 29 (Final Hotfix)          #
+// #  Built By: Andrew, Davis, Kohen, Matteo #
+// ###########################################
+
 #include "ImportMenu.h"
 #include <iostream>
 #include <algorithm>
 
 using namespace std;
 
+// Main Import Menu loop
 void ImportMenu::display() {
     int choice;
     do {
@@ -28,6 +35,7 @@ void ImportMenu::display() {
     } while (choice != 4);
 }
 
+// Add a new import entry
 void ImportMenu::addImportRecord() {
     string material;
     double quantity, cost;
@@ -46,6 +54,7 @@ void ImportMenu::addImportRecord() {
     cout << "\033[1;32mImport record added.\033[0m\n";
 }
 
+// View all current import entries
 void ImportMenu::viewImportRecords() {
     if (importList->empty()) {
         cout << "\033[1;33mNo import records available.\033[0m\n";
@@ -57,6 +66,7 @@ void ImportMenu::viewImportRecords() {
     }
 }
 
+// Delete a record by material name
 void ImportMenu::deleteImportRecord() {
     if (importList->empty()) {
         cout << "\033[1;33mNo import records to delete.\033[0m\n";

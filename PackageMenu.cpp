@@ -1,9 +1,16 @@
+// ###########################################
+// #     TANK'S DISTRIBUTION SYSTEM          #
+// #  2025 - 03 - 29 (Final Hotfix)          #
+// #  Built By: Andrew, Davis, Kohen, Matteo #
+// ###########################################
+
 #include "PackageMenu.h"
 #include <iostream>
 #include <algorithm>
 
 using namespace std;
 
+// Main UI loop for package management
 void PackageMenu::display() {
     int choice;
     do {
@@ -24,12 +31,12 @@ void PackageMenu::display() {
             case 4: deletePackage(); break;
             case 5: break;
             default:
-                cout << "\033[1;31mInvalid choice!\033[0m\n";
-                break;
+                cout << "\033[1;31mInvalid choice!\033[0m\n"; break;
         }
     } while (choice != 5);
 }
 
+// Add a new package to the list
 void PackageMenu::addPackage() {
     string track, destination, status;
     double weight;
@@ -52,12 +59,13 @@ void PackageMenu::addPackage() {
     p.setStatus(status);
     packages->push_back(p);
 
-    cout << "Package added successfully.\n";
+    cout << "\033[1;32mPackage added successfully.\033[0m\n";
 }
 
+// View all packages
 void PackageMenu::viewPackages() {
     if (packages->empty()) {
-        cout << "No packages to display.\n";
+        cout << "\033[1;33mNo packages to display.\033[0m\n";
         return;
     }
 
@@ -66,6 +74,7 @@ void PackageMenu::viewPackages() {
     }
 }
 
+// Edit a package by tracking number
 void PackageMenu::editPackage() {
     string track;
     cin.ignore();
@@ -87,14 +96,15 @@ void PackageMenu::editPackage() {
 
             p = Package(track, newDest, newWeight);
             p.setStatus(newStatus);
-            cout << "Package updated successfully.\n";
+            cout << "\033[1;32mPackage updated successfully.\033[0m\n";
             return;
         }
     }
 
-    cout << "Package not found.\n";
+    cout << "\033[1;31mPackage not found.\033[0m\n";
 }
 
+// Delete a package by tracking number
 void PackageMenu::deletePackage() {
     string track;
     cin.ignore();
@@ -108,8 +118,8 @@ void PackageMenu::deletePackage() {
 
     if (it != packages->end()) {
         packages->erase(it, packages->end());
-        cout << "Package deleted successfully.\n";
+        cout << "\033[1;32mPackage deleted successfully.\033[0m\n";
     } else {
-        cout << "Package not found.\n";
+        cout << "\033[1;31mPackage not found.\033[0m\n";
     }
 }

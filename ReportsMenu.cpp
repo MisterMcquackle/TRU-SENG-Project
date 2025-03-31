@@ -1,3 +1,9 @@
+// ###########################################
+// #     TANK'S DISTRIBUTION SYSTEM          #
+// #  2025 - 03 - 29 (Final Hotfix)          #
+// #  Built By: Andrew, Davis, Kohen, Matteo #
+// ###########################################
+
 #include "ReportsMenu.h"
 #include <iostream>
 #include <iomanip>
@@ -5,6 +11,7 @@
 
 using namespace std;
 
+// Main menu display for reports
 void ReportsMenu::display() {
     int choice;
     do {
@@ -27,6 +34,7 @@ void ReportsMenu::display() {
     } while (choice != 4);
 }
 
+// Generates a payroll summary for all employees
 void ReportsMenu::generatePayrollReport() {
     if (!employees) return;
 
@@ -41,6 +49,7 @@ void ReportsMenu::generatePayrollReport() {
     cout << "Total Estimated Payroll: $" << totalPayroll << "\n";
 }
 
+// Summarizes how many packages go to each destination
 void ReportsMenu::generatePackageSummary() {
     if (!packages || packages->empty()) {
         cout << "\n\033[1;33m[Packages] No package data available.\033[0m\n";
@@ -60,6 +69,7 @@ void ReportsMenu::generatePackageSummary() {
     }
 }
 
+// Displays each import and its total cost
 void ReportsMenu::generateImportSummary() {
     if (!imports || imports->empty()) {
         cout << "\n\033[1;33m[Imports] No import records found.\033[0m\n";

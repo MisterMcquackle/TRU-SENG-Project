@@ -1,7 +1,8 @@
-// ===============================================
-// TANK'S Distribution System
-// Base Menu Class
-// ===============================================
+// ###########################################
+// #     TANK'S DISTRIBUTION SYSTEM          #
+// #  2025 - 03 - 29 (Final Hotfix)          #
+// #  Built By: Andrew, Davis, Kohen, Matteo #
+// ###########################################
 
 #ifndef MENU_H
 #define MENU_H
@@ -10,11 +11,13 @@
 
 using namespace std;
 
-// Abstract base class for all menu types
+// Abstract base class for all interactive menus
 class Menu {
 public:
     virtual ~Menu() = default;
-    virtual void display() = 0; // Pure virtual function for displaying the menu
+
+    // Pure virtual method to be implemented by all derived menus
+    virtual void display() = 0;
 };
 
 #endif
