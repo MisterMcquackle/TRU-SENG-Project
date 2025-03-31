@@ -15,6 +15,7 @@ int main() {
     Menu* menu = nullptr;
     Employees employees;
     vector<Package> packages;
+    vector<Import> imports;
 
     do {
         cout << "\n\033[1;36m==============================\033[0m\n";
@@ -41,7 +42,7 @@ int main() {
                 menu = new ImportMenu();
                 break;
             case 4:
-                menu = new ReportsMenu(&employees, &packages);
+                menu = new ReportsMenu(&employees, &packages, &imports);
                 break;
             case 5:
                 menu = new SettingsMenu(&employees, &packages);

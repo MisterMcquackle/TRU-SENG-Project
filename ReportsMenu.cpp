@@ -61,5 +61,23 @@ void ReportsMenu::generatePackageSummary() {
 }
 
 void ReportsMenu::generateImportSummary() {
-    cout << "\n\033[1;33m[Imports] Feature not yet implemented.\033[0m\n";
+    if (!imports || imports->empty()) {
+        cout << "\n\033[1;33m[Imports] No import records found.\033[0m\n";
+        return;
+    }
+
+    cout << "\n\033[1;34m[Import Cost Summary]\033[0m\n";
+    double totalImportCost = 0.0;
+
+    for (const auto& imp : *imports) {
+        cout << left << setw(20) << imp.getMaterial()
+             << " | Qty: " << setw(8) << imp.getQuantity()
+             << "kg | $" << setw(6) << imp.getCostPerKg()
+             << " per kg | Total: $" << imp.getTotalCost() << "\n";
+
+        totalImportCost += imp.getTotalCost();
+    }
+
+    cout << "---------------------------------------------\n";
+    cout << "Total Import Cost: $" << totalImportCost << "\n";
 }

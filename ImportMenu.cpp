@@ -1,10 +1,6 @@
-// ===============================================
-// TANK'S Distribution System
-// Import Menu Implementation
-// ===============================================
-
 #include "ImportMenu.h"
 #include <iostream>
+#include <algorithm>
 #include <limits>
 
 using namespace std;
@@ -12,58 +8,72 @@ using namespace std;
 void ImportMenu::display() {
     int choice;
     do {
-        cout << "\n\033[1;36m--- Import Management ---\033[0m\n"
-             << "1. Add Import Record\n"
-             << "2. View Import Records\n"
-             << "3. Update Import Record\n"
-             << "4. Back to Main Menu\n"
-             << "-------------------------\n"
-             << "Enter your choice: ";
+        cout << "\n\033[1;36m--- Import Management ---\033[0m\n";
+        cout << "1. Add Import Record\n";
+        cout << "2. View Import Records\n";
+        cout << "3. Delete Import Record\n";
+        cout << "4. Back to Main Menu\n";
+        cout << "---------------------------\n";
+        cout << "Enter your choice: ";
         cin >> choice;
 
         switch (choice) {
             case 1: addImportRecord(); break;
             case 2: viewImportRecords(); break;
-            case 3: updateImportRecord(); break;
+            case 3: deleteImportRecord(); break;
             case 4: break;
-            default: cout << "\033[1;31mInvalid choice!\033[0m\n";
+            default: cout << "\033[1;31mInvalid choice!\033[0m\n"; break;
         }
     } while (choice != 4);
 }
 
 void ImportMenu::addImportRecord() {
-    string record;
+    string material;
+    double quantity, cost;
+
     cin.ignore();
-    cout << "Enter import record details: ";
-    getline(cin, record);
-    importRecords.push_back(record);
-    cout << "\033[1;32mRecord added.\033[0m\n";
+    cout << "Enter material name: ";
+    getline(cin, material);
+
+    cout << "Enter quantity (kg): ";
+    cin >> quantity;
+
+    cout << "Enter cost per kg: ";
+    cin >> cost;
+
+    importList.emplace_back(material, quantity, cost);
+    cout << "\033[1;32mImport record added.\033[0m\n";
 }
 
 void ImportMenu::viewImportRecords() {
-    if (importRecords.empty()) {
-        cout << "\033[1;31mNo import records available.\033[0m\n";
+    if (importList.empty()) {
+        cout << "\033[1;33mNo import records available.\033[0m\n";
         return;
     }
-    for (const auto& r : importRecords) {
-        cout << "\033[1;36m- \033[0m" << r << "\n";
+
+    for (const auto& record : importList) {
+        record.display();
     }
 }
 
-void ImportMenu::updateImportRecord() {
-    string oldRecord, newRecord;
-    cin.ignore();
-    cout << "Enter existing record to update: ";
-    getline(cin, oldRecord);
-
-    for (auto& r : importRecords) {
-        if (r == oldRecord) {
-            cout << "Enter updated details: ";
-            getline(cin, newRecord);
-            r = newRecord;
-            cout << "\033[1;32mRecord updated.\033[0m\n";
-            return;
-        }
+void ImportMenu::deleteImportRecord() {
+    if (importList.empty()) {
+        cout << "\033[1;33mNo import records to delete.\033[0m\n";
+        return;
     }
-    cout << "\033[1;31mRecord not found.\033[0m\n";
+
+    string name;
+    cin.ignore();
+    cout << "Enter material name to delete: ";
+    getline(cin, name);
+
+    auto it = remove_if(importList.begin(), importList.end(),
+        [&](const Import& imp) { return imp.getMaterial() == name; });
+
+    if (it != importList.end()) {
+        importList.erase(it, importList.end());
+        cout << "\033[1;32mRecord deleted.\033[0m\n";
+    } else {
+        cout << "\033[1;31mMaterial not found.\033[0m\n";
+    }
 }
