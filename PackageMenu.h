@@ -14,7 +14,10 @@ public:
     void display() override;
 
 private:
+    void addPackage();
     void viewPackages();
+    void editPackage();
+    void deletePackage();
 };
 
 #endif
