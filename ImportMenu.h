@@ -7,9 +7,10 @@
 
 class ImportMenu : public Menu {
 private:
-    std::vector<Import> importList;
+    std::vector<Import>* importList;
 
 public:
+    ImportMenu(std::vector<Import>* list) : importList(list) {}
     void display() override;
 
 private:

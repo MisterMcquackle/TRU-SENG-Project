@@ -1,7 +1,6 @@
 #include "ImportMenu.h"
 #include <iostream>
 #include <algorithm>
-#include <limits>
 
 using namespace std;
 
@@ -22,7 +21,9 @@ void ImportMenu::display() {
             case 2: viewImportRecords(); break;
             case 3: deleteImportRecord(); break;
             case 4: break;
-            default: cout << "\033[1;31mInvalid choice!\033[0m\n"; break;
+            default:
+                cout << "\033[1;31mInvalid choice!\033[0m\n";
+                break;
         }
     } while (choice != 4);
 }
@@ -41,23 +42,23 @@ void ImportMenu::addImportRecord() {
     cout << "Enter cost per kg: ";
     cin >> cost;
 
-    importList.emplace_back(material, quantity, cost);
+    importList->emplace_back(material, quantity, cost);
     cout << "\033[1;32mImport record added.\033[0m\n";
 }
 
 void ImportMenu::viewImportRecords() {
-    if (importList.empty()) {
+    if (importList->empty()) {
         cout << "\033[1;33mNo import records available.\033[0m\n";
         return;
     }
 
-    for (const auto& record : importList) {
+    for (const auto& record : *importList) {
         record.display();
     }
 }
 
 void ImportMenu::deleteImportRecord() {
-    if (importList.empty()) {
+    if (importList->empty()) {
         cout << "\033[1;33mNo import records to delete.\033[0m\n";
         return;
     }
@@ -67,11 +68,13 @@ void ImportMenu::deleteImportRecord() {
     cout << "Enter material name to delete: ";
     getline(cin, name);
 
-    auto it = remove_if(importList.begin(), importList.end(),
-        [&](const Import& imp) { return imp.getMaterial() == name; });
+    auto it = remove_if(importList->begin(), importList->end(),
+        [&](const Import& imp) {
+            return imp.getMaterial() == name;
+        });
 
-    if (it != importList.end()) {
-        importList.erase(it, importList.end());
+    if (it != importList->end()) {
+        importList->erase(it, importList->end());
         cout << "\033[1;32mRecord deleted.\033[0m\n";
     } else {
         cout << "\033[1;31mMaterial not found.\033[0m\n";

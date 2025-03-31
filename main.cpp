@@ -39,7 +39,7 @@ int main() {
                 menu = new PackageMenu(&packages);
                 break;
             case 3:
-                menu = new ImportMenu();
+                menu = new ImportMenu(&imports);
                 break;
             case 4:
                 menu = new ReportsMenu(&employees, &packages, &imports);
