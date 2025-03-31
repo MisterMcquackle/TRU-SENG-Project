@@ -26,6 +26,12 @@ void Employee::setSchedule() {
     }
 }
 
+void Employee::setScheduleDay(int dayIndex, const string& shift) {
+    if (dayIndex >= 0 && dayIndex < 7) {
+        schedule[dayIndex] = shift;
+    }
+}
+
 void Employee::displaySchedule() const {
     for (int i = 0; i < 7; ++i) {
         cout << days[i] << ": " << schedule[i] << "\n";
@@ -43,18 +49,7 @@ void Employee::displayInfo() const {
     cout << "------------------------\n";
 }
 
-string Employee::getName() const {
-    return name;
-}
-
-string Employee::getJobTitle() const {
-    return jobTitle;
-}
-
-double Employee::getHourlyRate() const {
-    return hourlyRate;
-}
-
-double Employee::getSalary() const {
-    return hourlyRate * 40.0 * 52.143; // average yearly work hours
-}
+string Employee::getName() const { return name; }
+string Employee::getJobTitle() const { return jobTitle; }
+double Employee::getHourlyRate() const { return hourlyRate; }
+double Employee::getSalary() const { return hourlyRate * 40.0 * 52.143; }

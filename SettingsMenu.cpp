@@ -18,7 +18,9 @@ void SettingsMenu::display() {
         switch (choice) {
             case 1: generateTestData(); break;
             case 2: break;
-            default: cout << "\033[1;31mInvalid choice!\033[0m\n"; break;
+            default:
+                cout << "\033[1;31mInvalid choice!\033[0m\n";
+                break;
         }
     } while (choice != 2);
 }
@@ -27,6 +29,7 @@ void SettingsMenu::generateTestData() {
     static const string names[] = {"Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Hank"};
     static const string jobs[] = {"Manager", "Clerk", "Driver", "IT Support", "Security"};
     static const string destinations[] = {"New York", "Los Angeles", "Chicago", "Houston", "Phoenix"};
+    static const string shifts[] = {"Off", "Day", "Night"};
 
     srand(static_cast<unsigned>(time(nullptr)));
 
@@ -37,6 +40,11 @@ void SettingsMenu::generateTestData() {
         double rate = 15.0 + (rand() % 2000) / 100.0;
 
         Employee e(name, job, rate);
+
+        for (int d = 0; d < 7; ++d) {
+            e.setScheduleDay(d, shifts[rand() % 3]);
+        }
+
         employees->addEmployee(e);
     }
 
