@@ -30,6 +30,7 @@ void SettingsMenu::generateTestData() {
     static const string jobs[] = {"Manager", "Clerk", "Driver", "IT Support", "Security"};
     static const string destinations[] = {"New York", "Los Angeles", "Chicago", "Houston", "Phoenix"};
     static const string shifts[] = {"Off", "Day", "Night"};
+    static const string materials[] = {"Steel", "Plastic", "Aluminum", "Copper", "Glass", "Wood", "Rubber", "Cement", "Paper", "Oil"};
 
     srand(static_cast<unsigned>(time(nullptr)));
 
@@ -58,5 +59,14 @@ void SettingsMenu::generateTestData() {
         packages->push_back(p);
     }
 
-    cout << "10 random employees and 15 random packages generated.\n";
+    // Generate imports
+    for (int i = 0; i < 10; ++i) {
+        string material = materials[i];  // ensure 10 unique ones
+        double quantity = 100 + (rand() % 500);       // 100 - 600 kg
+        double costPerKg = 1.0 + (rand() % 1000) / 50.0; // $1 - $21
+
+        imports->emplace_back(material, quantity, costPerKg);
+    }
+
+    cout << "10 random employees, 15 packages, and 10 import records generated.\n";
 }

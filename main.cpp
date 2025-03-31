@@ -45,7 +45,7 @@ int main() {
                 menu = new ReportsMenu(&employees, &packages, &imports);
                 break;
             case 5:
-                menu = new SettingsMenu(&employees, &packages);
+                menu = new SettingsMenu(&employees, &packages, &imports);
                 break;
             case 6:
                 cout << "\033[1;32mExiting... Goodbye!\033[0m\n";
